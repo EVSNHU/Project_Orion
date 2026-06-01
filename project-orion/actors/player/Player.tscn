@@ -1,3 +1,23 @@
 [gd_scene format=3 uid="uid://0an5ho30rnn7"]
 
+[ext_resource type="Script" uid="uid://cnq4uqyeml4pl" path="res://actors/player/player.gd" id="1_dthho"]
+[ext_resource type="PackedScene" uid="uid://5utrlx0okyjv" path="res://assets/Godot - UE/Superhero_Male_FullBody.gltf" id="1_ehwws"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dthho"]
+
 [node name="Player" type="CharacterBody3D" unique_id=1501633959]
+script = ExtResource("1_dthho")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=356348417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004972458, 0.929904, 0)
+shape = SubResource("CapsuleShape3D_dthho")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=542879482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004972458, 0.929904, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=195966208]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1835216813]
+
+[node name="Superhero_Male_FullBody" parent="Node3D" unique_id=411920055 instance=ExtResource("1_ehwws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004972458, 0.021443963, 0)
