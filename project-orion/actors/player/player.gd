@@ -1,7 +1,12 @@
 extends CharacterBody3D
 
+@onready var spring_arm := $SpringArm3D
+
 
 const SPEED = 5.0
+const MOUSE_SENSITIVITY = 0.003
+const LOW_LIMIT = -1.2
+const HIGH_LIMIT = 0.4
 #TODO: const JUMP_VELOCITY = 4.5
 
 
@@ -26,3 +31,13 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _input(event: InputEvent) -> void:
+
+	if event is InputEventMouseMotion:
+		self.rotate_y(event.relative.x * -MOUSE_SENSITIVITY )
+		spring_arm.rotation.x -= event.relative.y * MOUSE_SENSITIVITY
+		spring_arm.rotation.x = clampf(spring_arm.rotation.x, LOW_LIMIT, HIGH_LIMIT)
